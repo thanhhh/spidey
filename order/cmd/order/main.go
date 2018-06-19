@@ -4,9 +4,11 @@ import (
 	"log"
 	"time"
 
-	"github.com/kelseyhightower/envconfig"
 	"github.com/tinrab/retry"
-	"github.com/tinrab/spidey/order"
+
+	"github.com/thanhhh/spidey/order"
+
+	"github.com/kelseyhightower/envconfig"
 )
 
 type Config struct {
@@ -17,12 +19,15 @@ type Config struct {
 
 func main() {
 	var cfg Config
+
 	err := envconfig.Process("", &cfg)
+
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	var r order.Repository
+
 	retry.ForeverSleep(2*time.Second, func(_ int) (err error) {
 		r, err = order.NewPostgresRepository(cfg.DatabaseURL)
 		if err != nil {
@@ -30,9 +35,10 @@ func main() {
 		}
 		return
 	})
+
 	defer r.Close()
 
-	log.Println("Listening on port 8080...")
 	s := order.NewService(r)
-	log.Fatal(order.ListenGRPC(s, cfg.AccountURL, cfg.CatalogURL, 8080))
+
+	log.Fatal(order.ListenRGPC(s, cfg.AccountURL, cfg.CatalogURL, 8080))
 }

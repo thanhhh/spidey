@@ -3,7 +3,8 @@ package account
 import (
 	"context"
 
-	"github.com/tinrab/spidey/account/pb"
+	"github.com/thanhhh/spidey/account/pb"
+
 	"google.golang.org/grpc"
 )
 
@@ -17,22 +18,19 @@ func NewClient(url string) (*Client, error) {
 	if err != nil {
 		return nil, err
 	}
-	c := pb.NewAccountServiceClient(conn)
-	return &Client{conn, c}, nil
-}
 
-func (c *Client) Close() {
-	c.conn.Close()
+	service := pb.NewAccountServiceClient(conn)
+
+	return &Client{conn, service}, nil
 }
 
 func (c *Client) PostAccount(ctx context.Context, name string) (*Account, error) {
-	r, err := c.service.PostAccount(
-		ctx,
-		&pb.PostAccountRequest{Name: name},
-	)
+	r, err := c.service.PostAccount(ctx, &pb.PostAccountRequest{Name: name})
+
 	if err != nil {
 		return nil, err
 	}
+
 	return &Account{
 		ID:   r.Account.Id,
 		Name: r.Account.Name,

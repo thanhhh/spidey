@@ -23,7 +23,7 @@ type Resolvers interface {
 	Mutation_createOrder(ctx context.Context, order OrderInput) (*Order, error)
 
 	Query_accounts(ctx context.Context, pagination *PaginationInput, id *string) ([]Account, error)
-	Query_products(ctx context.Context, pagination *PaginationInput, query *string, id *string) ([]Product, error)
+	Query_products(ctx context.Context, pagination *PaginationInput, query *string, ids []string) ([]Product, error)
 }
 
 type executableSchema struct {
@@ -660,21 +660,25 @@ func (ec *executionContext) _Query_products(ctx context.Context, field graphql.C
 		}
 	}
 	args["query"] = arg1
-	var arg2 *string
-	if tmp, ok := field.Args["id"]; ok {
+	var arg2 []string
+	if tmp, ok := field.Args["ids"]; ok {
 		var err error
-		var ptr1 string
+		var rawIf1 []interface{}
 		if tmp != nil {
-			ptr1, err = graphql.UnmarshalString(tmp)
-			arg2 = &ptr1
+			if tmp1, ok := tmp.([]interface{}); ok {
+				rawIf1 = tmp1
+			}
 		}
-
+		arg2 = make([]string, len(rawIf1))
+		for idx1 := range rawIf1 {
+			arg2[idx1], err = graphql.UnmarshalString(rawIf1[idx1])
+		}
 		if err != nil {
 			ec.Error(ctx, err)
 			return graphql.Null
 		}
 	}
-	args["id"] = arg2
+	args["ids"] = arg2
 	ctx = graphql.WithResolverContext(ctx, &graphql.ResolverContext{
 		Object: "Query",
 		Args:   args,
@@ -690,7 +694,7 @@ func (ec *executionContext) _Query_products(ctx context.Context, field graphql.C
 		}()
 
 		resTmp, err := ec.ResolverMiddleware(ctx, func(ctx context.Context) (interface{}, error) {
-			return ec.resolvers.Query_products(ctx, args["pagination"].(*PaginationInput), args["query"].(*string), args["id"].(*string))
+			return ec.resolvers.Query_products(ctx, args["pagination"].(*PaginationInput), args["query"].(*string), args["ids"].([]string))
 		})
 		if err != nil {
 			ec.Error(ctx, err)
@@ -1692,6 +1696,6 @@ type Mutation {
 
 type Query {
   accounts(pagination: PaginationInput, id: String): [Account!]!
-  products(pagination: PaginationInput, query: String, id: String): [Product!]!
+  products(pagination: PaginationInput, query: String, ids: [String!]!): [Product!]!
 }
 `)

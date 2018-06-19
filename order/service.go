@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/segmentio/ksuid"
+	"github.com/satori/go.uuid"
 )
 
 type Service interface {
@@ -42,7 +42,7 @@ func (s orderService) PostOrder(
 	products []OrderedProduct,
 ) (*Order, error) {
 	o := &Order{
-		ID:        ksuid.New().String(),
+		ID:        uuid.NewV4().String(),
 		CreatedAt: time.Now().UTC(),
 		AccountID: accountID,
 		Products:  products,

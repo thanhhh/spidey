@@ -4,13 +4,14 @@ import (
 	"log"
 	"time"
 
-	"github.com/kelseyhightower/envconfig"
 	"github.com/tinrab/retry"
-	"github.com/tinrab/spidey/catalog"
+
+	"github.com/kelseyhightower/envconfig"
+	"github.com/thanhhh/spidey/catalog"
 )
 
 type Config struct {
-	DatabaseURL string `envconfig:"DATABASE_URL"`
+	ElasticURL string `envconfig:"ELASTIC_URL"`
 }
 
 func main() {
@@ -21,13 +22,16 @@ func main() {
 	}
 
 	var r catalog.Repository
+
 	retry.ForeverSleep(2*time.Second, func(_ int) (err error) {
-		r, err = catalog.NewElasticRepository(cfg.DatabaseURL)
+		r, err = catalog.NewElasticRepository(cfg.ElasticURL)
 		if err != nil {
 			log.Println(err)
 		}
+
 		return
 	})
+
 	defer r.Close()
 
 	log.Println("Listening on port 8080...")

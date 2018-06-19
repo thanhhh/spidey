@@ -4,9 +4,10 @@ import (
 	"log"
 	"time"
 
-	"github.com/kelseyhightower/envconfig"
+	"github.com/thanhhh/spidey/account"
 	"github.com/tinrab/retry"
-	"github.com/tinrab/spidey/account"
+
+	"github.com/kelseyhightower/envconfig"
 )
 
 type Config struct {
@@ -15,7 +16,9 @@ type Config struct {
 
 func main() {
 	var cfg Config
+
 	err := envconfig.Process("", &cfg)
+
 	if err != nil {
 		log.Fatal(err)
 	}

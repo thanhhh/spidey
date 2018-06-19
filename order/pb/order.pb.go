@@ -24,11 +24,11 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 type Order struct {
-	Id                   string                `protobuf:"bytes,1,opt,name=id" json:"id,omitempty"`
+	Id                   string                `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	CreatedAt            []byte                `protobuf:"bytes,2,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
-	AccountId            string                `protobuf:"bytes,3,opt,name=accountId" json:"accountId,omitempty"`
-	TotalPrice           float64               `protobuf:"fixed64,4,opt,name=totalPrice" json:"totalPrice,omitempty"`
-	Products             []*Order_OrderProduct `protobuf:"bytes,5,rep,name=products" json:"products,omitempty"`
+	AccountId            string                `protobuf:"bytes,3,opt,name=accountId,proto3" json:"accountId,omitempty"`
+	TotalPrice           float64               `protobuf:"fixed64,4,opt,name=totalPrice,proto3" json:"totalPrice,omitempty"`
+	Products             []*Order_OrderProduct `protobuf:"bytes,5,rep,name=products,proto3" json:"products,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
 	XXX_unrecognized     []byte                `json:"-"`
 	XXX_sizecache        int32                 `json:"-"`
@@ -94,11 +94,11 @@ func (m *Order) GetProducts() []*Order_OrderProduct {
 }
 
 type Order_OrderProduct struct {
-	Id                   string   `protobuf:"bytes,1,opt,name=id" json:"id,omitempty"`
-	Name                 string   `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
-	Description          string   `protobuf:"bytes,3,opt,name=description" json:"description,omitempty"`
-	Price                float64  `protobuf:"fixed64,4,opt,name=price" json:"price,omitempty"`
-	Quantity             uint32   `protobuf:"varint,5,opt,name=quantity" json:"quantity,omitempty"`
+	Id                   string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Description          string   `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	Price                float64  `protobuf:"fixed64,4,opt,name=price,proto3" json:"price,omitempty"`
+	Quantity             uint32   `protobuf:"varint,5,opt,name=quantity,proto3" json:"quantity,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -164,8 +164,8 @@ func (m *Order_OrderProduct) GetQuantity() uint32 {
 }
 
 type PostOrderRequest struct {
-	AccountId            string                           `protobuf:"bytes,2,opt,name=accountId" json:"accountId,omitempty"`
-	Products             []*PostOrderRequest_OrderProduct `protobuf:"bytes,4,rep,name=products" json:"products,omitempty"`
+	AccountId            string                           `protobuf:"bytes,2,opt,name=accountId,proto3" json:"accountId,omitempty"`
+	Products             []*PostOrderRequest_OrderProduct `protobuf:"bytes,4,rep,name=products,proto3" json:"products,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}                         `json:"-"`
 	XXX_unrecognized     []byte                           `json:"-"`
 	XXX_sizecache        int32                            `json:"-"`
@@ -210,8 +210,8 @@ func (m *PostOrderRequest) GetProducts() []*PostOrderRequest_OrderProduct {
 }
 
 type PostOrderRequest_OrderProduct struct {
-	ProductId            string   `protobuf:"bytes,2,opt,name=productId" json:"productId,omitempty"`
-	Quantity             uint32   `protobuf:"varint,3,opt,name=quantity" json:"quantity,omitempty"`
+	ProductId            string   `protobuf:"bytes,2,opt,name=productId,proto3" json:"productId,omitempty"`
+	Quantity             uint32   `protobuf:"varint,3,opt,name=quantity,proto3" json:"quantity,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -256,7 +256,7 @@ func (m *PostOrderRequest_OrderProduct) GetQuantity() uint32 {
 }
 
 type PostOrderResponse struct {
-	Order                *Order   `protobuf:"bytes,1,opt,name=order" json:"order,omitempty"`
+	Order                *Order   `protobuf:"bytes,1,opt,name=order,proto3" json:"order,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -294,7 +294,7 @@ func (m *PostOrderResponse) GetOrder() *Order {
 }
 
 type GetOrderRequest struct {
-	Id                   string   `protobuf:"bytes,1,opt,name=id" json:"id,omitempty"`
+	Id                   string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -332,7 +332,7 @@ func (m *GetOrderRequest) GetId() string {
 }
 
 type GetOrderResponse struct {
-	Order                *Order   `protobuf:"bytes,1,opt,name=order" json:"order,omitempty"`
+	Order                *Order   `protobuf:"bytes,1,opt,name=order,proto3" json:"order,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -370,7 +370,7 @@ func (m *GetOrderResponse) GetOrder() *Order {
 }
 
 type GetOrdersForAccountRequest struct {
-	AccountId            string   `protobuf:"bytes,1,opt,name=accountId" json:"accountId,omitempty"`
+	AccountId            string   `protobuf:"bytes,1,opt,name=accountId,proto3" json:"accountId,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -408,7 +408,7 @@ func (m *GetOrdersForAccountRequest) GetAccountId() string {
 }
 
 type GetOrdersForAccountResponse struct {
-	Orders               []*Order `protobuf:"bytes,1,rep,name=orders" json:"orders,omitempty"`
+	Orders               []*Order `protobuf:"bytes,1,rep,name=orders,proto3" json:"orders,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`

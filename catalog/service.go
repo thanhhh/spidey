@@ -3,7 +3,7 @@ package catalog
 import (
 	"context"
 
-	"github.com/segmentio/ksuid"
+	"github.com/satori/go.uuid"
 )
 
 type Service interface {
@@ -13,7 +13,6 @@ type Service interface {
 	GetProductsByIDs(ctx context.Context, ids []string) ([]Product, error)
 	SearchProducts(ctx context.Context, query string, skip uint64, take uint64) ([]Product, error)
 }
-
 type Product struct {
 	ID          string  `json:"id"`
 	Name        string  `json:"name"`
@@ -34,7 +33,7 @@ func (s *catalogService) PostProduct(ctx context.Context, name, description stri
 		Name:        name,
 		Description: description,
 		Price:       price,
-		ID:          ksuid.New().String(),
+		ID:          uuid.NewV4().String(),
 	}
 	if err := s.repository.PutProduct(ctx, *p); err != nil {
 		return nil, err

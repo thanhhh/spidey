@@ -3,7 +3,8 @@ package catalog
 import (
 	"context"
 
-	"github.com/tinrab/spidey/catalog/pb"
+	"github.com/thanhhh/spidey/catalog/pb"
+
 	"google.golang.org/grpc"
 )
 

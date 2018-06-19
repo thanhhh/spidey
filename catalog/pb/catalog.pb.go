@@ -24,10 +24,10 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 type Product struct {
-	Id                   string   `protobuf:"bytes,1,opt,name=id" json:"id,omitempty"`
-	Name                 string   `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
-	Description          string   `protobuf:"bytes,3,opt,name=description" json:"description,omitempty"`
-	Price                float64  `protobuf:"fixed64,4,opt,name=price" json:"price,omitempty"`
+	Id                   string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Description          string   `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	Price                float64  `protobuf:"fixed64,4,opt,name=price,proto3" json:"price,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -37,7 +37,7 @@ func (m *Product) Reset()         { *m = Product{} }
 func (m *Product) String() string { return proto.CompactTextString(m) }
 func (*Product) ProtoMessage()    {}
 func (*Product) Descriptor() ([]byte, []int) {
-	return fileDescriptor_catalog_604c65ed1e26c8cd, []int{0}
+	return fileDescriptor_catalog_52a149fbe7054f13, []int{0}
 }
 func (m *Product) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Product.Unmarshal(m, b)
@@ -86,9 +86,9 @@ func (m *Product) GetPrice() float64 {
 }
 
 type PostProductRequest struct {
-	Name                 string   `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
-	Description          string   `protobuf:"bytes,2,opt,name=description" json:"description,omitempty"`
-	Price                float64  `protobuf:"fixed64,3,opt,name=price" json:"price,omitempty"`
+	Name                 string   `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Description          string   `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
+	Price                float64  `protobuf:"fixed64,3,opt,name=price,proto3" json:"price,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -98,7 +98,7 @@ func (m *PostProductRequest) Reset()         { *m = PostProductRequest{} }
 func (m *PostProductRequest) String() string { return proto.CompactTextString(m) }
 func (*PostProductRequest) ProtoMessage()    {}
 func (*PostProductRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_catalog_604c65ed1e26c8cd, []int{1}
+	return fileDescriptor_catalog_52a149fbe7054f13, []int{1}
 }
 func (m *PostProductRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_PostProductRequest.Unmarshal(m, b)
@@ -140,7 +140,7 @@ func (m *PostProductRequest) GetPrice() float64 {
 }
 
 type PostProductResponse struct {
-	Product              *Product `protobuf:"bytes,1,opt,name=product" json:"product,omitempty"`
+	Product              *Product `protobuf:"bytes,1,opt,name=product,proto3" json:"product,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -150,7 +150,7 @@ func (m *PostProductResponse) Reset()         { *m = PostProductResponse{} }
 func (m *PostProductResponse) String() string { return proto.CompactTextString(m) }
 func (*PostProductResponse) ProtoMessage()    {}
 func (*PostProductResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_catalog_604c65ed1e26c8cd, []int{2}
+	return fileDescriptor_catalog_52a149fbe7054f13, []int{2}
 }
 func (m *PostProductResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_PostProductResponse.Unmarshal(m, b)
@@ -178,7 +178,7 @@ func (m *PostProductResponse) GetProduct() *Product {
 }
 
 type GetProductRequest struct {
-	Id                   string   `protobuf:"bytes,1,opt,name=id" json:"id,omitempty"`
+	Id                   string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -188,7 +188,7 @@ func (m *GetProductRequest) Reset()         { *m = GetProductRequest{} }
 func (m *GetProductRequest) String() string { return proto.CompactTextString(m) }
 func (*GetProductRequest) ProtoMessage()    {}
 func (*GetProductRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_catalog_604c65ed1e26c8cd, []int{3}
+	return fileDescriptor_catalog_52a149fbe7054f13, []int{3}
 }
 func (m *GetProductRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GetProductRequest.Unmarshal(m, b)
@@ -216,7 +216,7 @@ func (m *GetProductRequest) GetId() string {
 }
 
 type GetProductResponse struct {
-	Product              *Product `protobuf:"bytes,1,opt,name=product" json:"product,omitempty"`
+	Product              *Product `protobuf:"bytes,1,opt,name=product,proto3" json:"product,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -226,7 +226,7 @@ func (m *GetProductResponse) Reset()         { *m = GetProductResponse{} }
 func (m *GetProductResponse) String() string { return proto.CompactTextString(m) }
 func (*GetProductResponse) ProtoMessage()    {}
 func (*GetProductResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_catalog_604c65ed1e26c8cd, []int{4}
+	return fileDescriptor_catalog_52a149fbe7054f13, []int{4}
 }
 func (m *GetProductResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GetProductResponse.Unmarshal(m, b)
@@ -254,10 +254,10 @@ func (m *GetProductResponse) GetProduct() *Product {
 }
 
 type GetProductsRequest struct {
-	Skip                 uint64   `protobuf:"varint,1,opt,name=skip" json:"skip,omitempty"`
-	Take                 uint64   `protobuf:"varint,2,opt,name=take" json:"take,omitempty"`
-	Ids                  []string `protobuf:"bytes,3,rep,name=ids" json:"ids,omitempty"`
-	Query                string   `protobuf:"bytes,4,opt,name=query" json:"query,omitempty"`
+	Skip                 uint64   `protobuf:"varint,1,opt,name=skip,proto3" json:"skip,omitempty"`
+	Take                 uint64   `protobuf:"varint,2,opt,name=take,proto3" json:"take,omitempty"`
+	Ids                  []string `protobuf:"bytes,3,rep,name=ids,proto3" json:"ids,omitempty"`
+	Query                string   `protobuf:"bytes,4,opt,name=query,proto3" json:"query,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -267,7 +267,7 @@ func (m *GetProductsRequest) Reset()         { *m = GetProductsRequest{} }
 func (m *GetProductsRequest) String() string { return proto.CompactTextString(m) }
 func (*GetProductsRequest) ProtoMessage()    {}
 func (*GetProductsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_catalog_604c65ed1e26c8cd, []int{5}
+	return fileDescriptor_catalog_52a149fbe7054f13, []int{5}
 }
 func (m *GetProductsRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GetProductsRequest.Unmarshal(m, b)
@@ -316,7 +316,7 @@ func (m *GetProductsRequest) GetQuery() string {
 }
 
 type GetProductsResponse struct {
-	Products             []*Product `protobuf:"bytes,1,rep,name=products" json:"products,omitempty"`
+	Products             []*Product `protobuf:"bytes,1,rep,name=products,proto3" json:"products,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
 	XXX_unrecognized     []byte     `json:"-"`
 	XXX_sizecache        int32      `json:"-"`
@@ -326,7 +326,7 @@ func (m *GetProductsResponse) Reset()         { *m = GetProductsResponse{} }
 func (m *GetProductsResponse) String() string { return proto.CompactTextString(m) }
 func (*GetProductsResponse) ProtoMessage()    {}
 func (*GetProductsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_catalog_604c65ed1e26c8cd, []int{6}
+	return fileDescriptor_catalog_52a149fbe7054f13, []int{6}
 }
 func (m *GetProductsResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GetProductsResponse.Unmarshal(m, b)
@@ -501,9 +501,9 @@ var _CatalogService_serviceDesc = grpc.ServiceDesc{
 	Metadata: "catalog.proto",
 }
 
-func init() { proto.RegisterFile("catalog.proto", fileDescriptor_catalog_604c65ed1e26c8cd) }
+func init() { proto.RegisterFile("catalog.proto", fileDescriptor_catalog_52a149fbe7054f13) }
 
-var fileDescriptor_catalog_604c65ed1e26c8cd = []byte{
+var fileDescriptor_catalog_52a149fbe7054f13 = []byte{
 	// 339 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x92, 0x4f, 0x4f, 0x32, 0x31,
 	0x10, 0xc6, 0xe9, 0xee, 0xbe, 0x2f, 0x32, 0x1b, 0x89, 0x0e, 0x8a, 0x1b, 0x4e, 0x9b, 0x1a, 0x23,

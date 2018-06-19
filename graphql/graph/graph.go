@@ -1,10 +1,18 @@
-//go:generate gqlgen -schema ../schema.graphql -typemap ../types.json
 package graph
 
 import (
-	"github.com/tinrab/spidey/account"
-	"github.com/tinrab/spidey/catalog"
-	"github.com/tinrab/spidey/order"
+	"errors"
+	"log"
+	"time"
+
+	"github.com/thanhhh/spidey/account"
+	"github.com/thanhhh/spidey/catalog"
+	"github.com/thanhhh/spidey/order"
+)
+
+var (
+	ErrOrderQuantityInvalid = errors.New("Order Quantity is invalid")
+	TimeOutInSecond         = 3 * time.Second
 )
 
 type GraphQLServer struct {
@@ -13,31 +21,27 @@ type GraphQLServer struct {
 	orderClient   *order.Client
 }
 
-func NewGraphQLServer(accountUrl, catalogURL, orderURL string) (*GraphQLServer, error) {
-	// Connect to account service
-	accountClient, err := account.NewClient(accountUrl)
+func NewGraphQLServer(accountURL, catalogURL, orderURL string) (*GraphQLServer, error) {
+	accountClient, err := account.NewClient(accountURL)
+
 	if err != nil {
+		log.Fatal(err)
 		return nil, err
 	}
 
-	// Connect to product service
 	catalogClient, err := catalog.NewClient(catalogURL)
+
 	if err != nil {
-		accountClient.Close()
+		log.Fatal(err)
 		return nil, err
 	}
 
-	// Connect to order service
 	orderClient, err := order.NewClient(orderURL)
+
 	if err != nil {
-		accountClient.Close()
-		catalogClient.Close()
+		log.Fatal(err)
 		return nil, err
 	}
 
-	return &GraphQLServer{
-		accountClient,
-		catalogClient,
-		orderClient,
-	}, nil
+	return &GraphQLServer{accountClient, catalogClient, orderClient}, nil
 }

@@ -1,4 +1,3 @@
-//go:generate protoc ./catalog.proto --go_out=plugins=grpc:./pb
 package catalog
 
 import (
@@ -7,9 +6,11 @@ import (
 	"log"
 	"net"
 
-	"github.com/tinrab/spidey/catalog/pb"
-	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
+
+	"github.com/thanhhh/spidey/catalog/pb"
+
+	"google.golang.org/grpc"
 )
 
 type grpcServer struct {
@@ -17,14 +18,17 @@ type grpcServer struct {
 }
 
 func ListenGRPC(s Service, port int) error {
-	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", port))
+	listener, err := net.Listen("tcp", fmt.Sprintf(":%d", port))
+
 	if err != nil {
 		return err
 	}
-	serv := grpc.NewServer()
-	pb.RegisterCatalogServiceServer(serv, &grpcServer{s})
-	reflection.Register(serv)
-	return serv.Serve(lis)
+
+	server := grpc.NewServer()
+	pb.RegisterCatalogServiceServer(server, &grpcServer{s})
+
+	reflection.Register(server)
+	return server.Serve(listener)
 }
 
 func (s *grpcServer) PostProduct(ctx context.Context, r *pb.PostProductRequest) (*pb.PostProductResponse, error) {
